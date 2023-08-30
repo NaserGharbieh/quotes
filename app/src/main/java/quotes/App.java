@@ -5,18 +5,23 @@ package quotes;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println(quotePrint());
+       // System.out.println(quotePrint());
+        fetchAndUpdateQuotes();
+        displayRandomLocalQuote();
+
 
     }
     public static String quotePrint(){
@@ -76,5 +81,65 @@ public class App {
 
 
     }
+    public static void fetchAndUpdateQuotes() {
+        try {
+            List<String> quoteList = fetchQuotesFromAPI();
+
+            if (!quoteList.isEmpty()) {
+                String randomQuote = getRandomQuote(quoteList);
+                Quote quote = new Quote("Ron Swanson", randomQuote);
+                updateQuotesFile(quote);
+            }
+        } catch (IOException e) {
+            System.out.println("Error fetching from API: " + e.getMessage());
+            displayRandomLocalQuote();
+        }
+    }
+
+    public static List<String> fetchQuotesFromAPI() throws IOException {
+        URL url = new URL("https://ron-swanson-quotes.herokuapp.com/v2/quotes");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        InputStreamReader reader = new InputStreamReader(connection.getInputStream());
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        String jsonData = bufferedReader.readLine();
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return Arrays.asList(gson.fromJson(jsonData, String[].class));
+    }
+    public static String getRandomQuote(List<String> quoteList) {
+        int randomIndex = new Random().nextInt(quoteList.size());
+        return quoteList.get(randomIndex);
+    }
+
+    public static void updateQuotesFile(Quote newQuote) {
+        Quote[] existingQuotes = readQuotesFromFile();
+        List<Quote> updatedQuotes = new ArrayList<>(Arrays.asList(existingQuotes));
+        updatedQuotes.add(newQuote);}
+    public static void displayRandomLocalQuote() {
+        Quote[] localQuotes = readQuotesFromFile();
+        if (localQuotes.length > 0) {
+            int randomIndex = new Random().nextInt(localQuotes.length);
+            Quote randomQuote = localQuotes[randomIndex];
+            System.out.println("Quote: " + randomQuote.getText());
+            System.out.println("Author: " + randomQuote.getAuthor());
+        } else {
+            System.out.println("There are no quotes.");
+        }
+    }
+
+    public static Quote[] readQuotesFromFile() {
+        Gson gson = new Gson();
+        Quote[] quotes = null;
+        try (BufferedReader reader = new BufferedReader(new FileReader("app/src/main/resources/fitchedQuoetes.json"))) {
+            quotes = gson.fromJson(reader, Quote[].class);
+        } catch (IOException e) {
+            System.out.println("Error reading quotes file: " + e.getMessage());
+        }
+        return quotes != null ? quotes : new Quote[0];
+    }
+
+
+
 }
 
