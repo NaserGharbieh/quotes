@@ -16,7 +16,8 @@ import java.util.Random;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println(quotePrint());
+        Quote myQuote= Quote.readQuotes("app/src/main/resources/recentquotes.json");
+        System.out.println(myQuote.toString());
 
     }
     public static String quotePrint(){
