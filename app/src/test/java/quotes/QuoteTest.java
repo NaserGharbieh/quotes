@@ -24,12 +24,12 @@ public class QuoteTest {
     }
 
     @Test
-    public void testGetText() {
+    public void testGetBody() {
         assertEquals("Sample Quote", quote.getText());
     }
 
     @Test
-    public void testSetText() {
+    public void testSetBody() {
         quote.setText("Updated Quote");
         assertEquals("Updated Quote", quote.getText());
     }
