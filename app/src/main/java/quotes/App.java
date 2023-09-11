@@ -13,8 +13,8 @@ public class App {
 
 
         Quotes.readQuotesFromApi();
-        Quotes.readQuotesFromApi();
-        Quotes.readQuotesFromApi();
+//        Quotes.readQuotesFromApi();
+//        Quotes.readQuotesFromApi();
 
 
 
