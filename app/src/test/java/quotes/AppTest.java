@@ -16,7 +16,7 @@ public class AppTest {
     @Test
     void testReadQuotesFromApi() {
         Quotes myQuotes = new Quotes();
-        Quotes newQuote = myQuotes.readQuotesFromApi("https://favqs.com/api/qotd", "src/test/resources/sampleQuotes.json");
+        Quotes newQuote = myQuotes.readQuotesFromApi();
 
 
         Assertions.assertNotNull(newQuote);

@@ -1,24 +1,24 @@
 # Quotes Application
 
-The Quotes Application is a Java program that allows users to retrieve random quotes from a JSON file containing a list of quotes. It also provides functionality to write a new quote to another JSON file.
+The Quotes Application is a Java program that allows users to retrieve random quotes from a JSON file containing a list of quotes. It also provides functionality to write a new quote to another JSON file from an Api.
 
 ## Features
 
 - Retrieve Random Quote: The application reads a JSON file containing a list of quotes. It randomly selects a quote from the list and displays it along with the author.
 
-- Write New Quote: The application provides the ability to add a new quote and its author to a different JSON file.
+- Write New Fitched quote from an API URL: The application provides the ability to add a new quote and its author to a different JSON file.
 
 
 ## Usage
 
 ### Retrieve Random Quote
 
-The application will display a random quote along with the author when you run it using the provided Gradle command.
+- The application will display a random quote along with the author when you run it using the provided Gradle command.
 
-### Write New Quote
+### Write New Fitched quote from an API URL
 
-To add a new quote and its author, you can call the `WriteQout()` method within the `App` class. This will write the new quote to the "writeRecentquotes.json" file in the resources directory.
-
+- The application will display a **Fitched random quote from an API URL** along with the author when you run it using the provided Gradle command.
+- **API URL : https://favqs.com/api/qotd** 
 ## Notes
 
 - Make sure you have the appropriate permissions to read from and write to files in the specified directories.
