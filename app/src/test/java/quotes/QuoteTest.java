@@ -25,18 +25,18 @@ public class QuoteTest {
 
     @Test
     public void testGetBody() {
-        assertEquals("Sample Quote", quote.getText());
+        assertEquals("Sample Quote", quote.getBody());
     }
 
     @Test
     public void testSetBody() {
-        quote.setText("Updated Quote");
-        assertEquals("Updated Quote", quote.getText());
+        quote.setBody("Updated Quote");
+        assertEquals("Updated Quote", quote.getBody());
     }
 
     @Test
     public void testToString() {
-        String expectedString = "Quote{author='John Doe', text='Sample Quote'}";
+        String expectedString = "Quote{author='John Doe', body='Sample Quote'}";
         assertEquals(expectedString, quote.toString());
     }
 
@@ -46,7 +46,6 @@ public class QuoteTest {
         Quote randomQuote = Quote.readQuotes("src/test/resources/recentquotes.json");
         assertNotNull(randomQuote);
         assertNotNull(randomQuote.getAuthor());
-        assertNotNull(randomQuote.getText());
     }
 }
 

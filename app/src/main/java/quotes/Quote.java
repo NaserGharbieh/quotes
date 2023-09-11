@@ -9,18 +9,18 @@ import java.util.Random;
 
 public class Quote {
     private String author;
-    private String text;
+    private String body;
 
-    public Quote(String author, String text) {
+    public Quote(String author, String body) {
         this.author = author;
-        this.text = text;
+        this.body = body;
     }
 
     @Override
     public String toString() {
         return "Quote{" +
                 "author='" + author + '\'' +
-                ", text='" + text + '\'' +
+                ", body='" + body + '\'' +
                 '}';
     }
 
@@ -32,12 +32,12 @@ public class Quote {
         this.author = author;
     }
 
-    public String getText() {
-        return text;
+    public String getBody() {
+        return body;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setBody(String body) {
+        this.body = body;
     }
     public  static Quote readQuotes(String path) {
         Quote[] quotes;
