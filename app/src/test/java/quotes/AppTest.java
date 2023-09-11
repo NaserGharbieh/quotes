@@ -13,7 +13,18 @@ public class AppTest {
             Quote quote = Quote.readQuotes("src/test/resources/recentquotes.json") ;
             Assertions.assertNotNull(quote);
         }
+    @Test
+    void testReadQuotesFromApi() {
+        Quotes myQuotes = new Quotes();
+        Quotes newQuote = myQuotes.readQuotesFromApi("https://favqs.com/api/qotd", "src/test/resources/sampleQuotes.json");
+
+
+        Assertions.assertNotNull(newQuote);
+
+
     }
+
+}
 
 
 
