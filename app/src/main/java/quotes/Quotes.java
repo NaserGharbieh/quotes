@@ -60,7 +60,7 @@ public class Quotes {
             // Append the new quote to the original data
             quotesData.add(myQuote);
             System.out.println(quotesData.size());
-            System.out.println(quotesData);
+
             // Write the updated list back to the JSON file
             WriteToFile("app/src/main/resources/writeRecentquotes.json",quotesData);
             return myQuote;
