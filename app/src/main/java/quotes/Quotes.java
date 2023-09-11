@@ -73,15 +73,32 @@ public class Quotes {
         return myQuote;
     }
     public static void  WriteToFile(String path,ArrayList<Quotes> apiQuotes) {
+        ArrayList<Quotes> fileQuotes=new ArrayList<>();
+
+        try(BufferedReader readfromfile=new BufferedReader(new FileReader(new File(path)))) {
+//
+           Gson gson = new Gson();
+           Quotes[] exsitingArray=gson.fromJson(readfromfile,Quotes[].class);
+           if(exsitingArray!=null){
+               fileQuotes.addAll(Arrays.asList(exsitingArray));
+           }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        fileQuotes.addAll(apiQuotes);
         try(FileWriter writer = new FileWriter(new File(path))) {
 //
-           Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(apiQuotes, writer);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(fileQuotes, writer);
             writer.close();
 
         } catch (IOException e) {
             e.printStackTrace();        }
     }
+
+
+
+
 
     @Override
     public String toString() {
