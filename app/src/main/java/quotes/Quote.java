@@ -10,19 +10,36 @@ import java.util.Random;
 public class Quote {
     private String author;
     private String body;
+    private String text;
 
-    public Quote(String author, String body) {
+
+    public Quote(String author, String body,String text) {
         this.author = author;
         this.body = body;
+        this.text=text;
+
+    }
+    public Quote(String author, String text) {
+        this.author = author;
+        this.text=text;
+        this.body=text;
+
+
     }
 
     @Override
     public String toString() {
+       if(body !=null){
         return "Quote{" +
                 "author='" + author + '\'' +
                 ", body='" + body + '\'' +
                 '}';
     }
+
+    else  return "Quote{" +
+               "author='" + author + '\'' +
+               ", text='" + text + '\'' +
+               '}'; }
 
     public String getAuthor() {
         return author;
